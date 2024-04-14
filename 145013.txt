@@ -1,0 +1,238 @@
+1:
+insalling git:
+sudo apt-get install git - команда за инсталација на гит, веќе инсталиран кај мене така да немаше потреба
+2: направено
+3: направено
+4: 
+почеток на проект:
+pwd - print working directory
+cd Desktop - промена на локација од home на Desktop
+mkdir SI_2024_lab1_145013 - создавање на фолдерот SI_2024_lab1_145013 според лабораториската
+cd SI_2024_lab1_145013/ - преместување во тој фолдер
+git init - првата вистинска git команда со која го иницијализирам фолдерот во локалниор репозиториум, т.е. сега гит го прати
+излез:
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /home/bubidebeliot/Desktop/SI_2024_lab1_145013/.git/
+5:
+git remote add origin https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git - поврзување на локалниот репозиториум со репозиториумот на github
+излез: - нема
+git remote -v - проверка дали репозиториумите се поврзани (-v == verbose flag за да ги видиме fetch и pull urls)
+излез:
+origin	https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git (fetch)
+origin	https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git (push)
+гледаме дека и fetch и pull url-то е поставено на мојот одалечен репозиториум.
+6:
+touch README.md - создавање на README.md фајлот
+nano README.md - едитирање на фајлот
+git add README.md - додавање на фајлот во tracking за гит (гит сега ќе го следи фајлот) и истовремено го поставуваме фајлот на сцена
+git commit -m "Initial commit" - правење на првиот комит со соодветната порака
+излез:
+[master (root-commit) 5a6b20e] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+единствениот фајл во commit - от е README.md каде што единствената промена е внесот на една линија (име презиме индекс)
+git log - преглед на логот
+излез:
+Author: KristijanNedanoski <kristijannedanoski@gmail.com>
+Date:   Sun Apr 14 15:47:22 2024 +0200
+
+    Initial commit
+се гледа првиот комит со време кога бил направен.
+7:
+по симнување на фајловите и копирање во git репото продолжуваме 
+git add SILab1Main.java SILab1_1.java SILab1_2.java - ги додаваме 3те фајлови во локалното репо
+излез: нема
+git diff --staged --stat
+излез:
+ SILab1Main.java | 17 +++++++++++++++++
+ SILab1_1.java   | 16 ++++++++++++++++
+ SILab1_2.java   | 14 ++++++++++++++
+ 3 files changed, 47 insertions(+)
+преглед на сите фајлови кои се во моментов на сцена а се различни од последниот комит. Гледаме дека има се на се 47 линии додадени во сите фајлови заедно од кои 17 се во првиот, 16 во вториот и 14 во третиот.
+git commit -m "Add starter code"
+излез:
+[master 542e129] Add starter code
+ 3 files changed, 47 insertions(+)
+ create mode 100644 SILab1Main.java
+ create mode 100644 SILab1_1.java
+ create mode 100644 SILab1_2.java
+3те фајлови се додатени во наредниот комит со соодветната порака
+8: (можеби поправилно ќе беше git push origin --all, али во моментот од брзање ги бутнав само тие на master која реално беше единствената гранка на локалното репо)
+git push origin master - ги синхронизираме гранката master на локалниот и одалечениот репозиториум со тоа што ги праќаме локалните фајлови на одалечениот репозиториум
+излез:
+Username for 'https://github.com': KristijanNedanoski
+Password for 'https://KristijanNedanoski@github.com': 
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (8/8), 1.15 KiB | 588.00 KiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git
+ * [new branch]      master -> master
+head - от е сега поставен на најновата верзија
+9:
+git branch bug1 - ја создаваме гранката bug1 од master (head е моментално на master)
+git branch bug2 - ја создаваме гранката bug2 исто така од master
+10:
+git checkout bug1 - се префрлуваме на гранка bug1. сега head-от е на таа гранка
+излез:
+Switched to branch 'bug1'
+11:
+nano SILab1_1.java - корекција на грешката
+git add SILab1_1.java - staging на грешката (ставање на грешката на сцена и спремање за комит)
+git commit -m "Fix wrong condition in filterOddLengthStrings" - правење на комитот со соодветната порака
+[bug1 7ea2f85] Fix wrong condition in filterOddLengthStrings
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+12:
+git checkout bug2 - се префрливме на гранка bug2 (сега таму е head - от)
+излез:
+Switched to branch 'bug2'
+nano SILab1_1.java - проверка дали првиот баг е сеуште во SILab1_1.java. токму така е
+13:
+nano SILab1_2.java - поправка на вториот баг
+git add SILab1_2.jaba - погрешен обид за додавање на фајлот (згрешено има)
+fatal: pathspec 'SILab1_2.jaba' did not match any files
+git add SILab1_2.java - правилната команда за да се постави на сцена фајлот
+git commit -m "Fix wrong condition in makeBigStringFrom" - правење на комитот со соодветните промени во фајлот SILab1_2.java
+излез:
+[bug2 6e45802] Fix wrong condition in makeBigStringFrom
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+14:
+git checkout bug1
+излез:
+Switched to branch 'bug1'
+15:
+nano SILab1Main.java - промена на фајлот
+git add SILab1Main.java - додавање на фајлот на сцена
+git commit -m "Call method filterOddLengthStrings in main class" - правење на комит на гранката bug1
+излез:
+[bug1 a1b1736] Call method filterOddLengthStrings in main class
+ 1 file changed, 1 insertion(+)
+еден фајл сменет со една линија додадена (специфинчно повикот кон функцијата во ред 16)
+16:
+git checkout bug2 - се враќаме на гранка bug2
+излез:
+Switched to branch 'bug2'
+17:
+nano SILab1Main.java - исто како погоре
+git add SILab1Main.java - исто како погоре
+git commit -m "Call method makeBigStringFrom in main class" - целосно истата промена сега ставена на branch bug2
+излез:
+[bug2 99c2357] Call method makeBigStringFrom in main class
+ 1 file changed, 1 insertion(+)
+истата промена само на гранка bug2
+18:
+git push origin --all - правиме синхронизација на сите гранки со одалечениот репозиториум
+излез:
+Username for 'https://github.com': KristijanNedanoski
+Password for 'https://KristijanNedanoski@github.com': 
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (11/11), 1.20 KiB | 409.00 KiB/s, done.
+Total 11 (delta 7), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (7/7), completed with 4 local objects.
+To https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git
+ * [new branch]      bug1 -> bug1
+ * [new branch]      bug2 -> bug2
+2 нови гранки додадени (bug1 и bug2) со соодветните промени направени во нив според барањата.
+19:
+git checkout master - се префрламе на гранката master
+излез:
+Switched to branch 'master' - успешно префрлање
+20:
+git merge bug1 - ја спојуваме гранката bug1 со гранката на која е head моментално (гранката на која сме моментално), што е master
+излез:
+Updating 542e129..a1b1736
+Fast-forward
+ SILab1Main.java | 1 +
+ SILab1_1.java   | 4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+merge - от немаше конфликти, имаше промени на 2 фајлови конкретно SILab1Main.java има додадено 1 ред и SILab1_1.java има промени во 4 реда од кои 2 се додадени, а 2 се избришани. Се на се тоа се 5 промени
+21:
+git status - проверка на моменталниот статус
+излез:
+On branch master
+nothing to commit, working tree clean
+се е во ред, сме на гранката master по завршување на спојувањето ќе продолжиме со push
+git push origin --all - ги синхронизираме сите гранки со одалечениот репозиториум
+излез:
+Username for 'https://github.com': KristijanNedanoski
+Password for 'https://KristijanNedanoski@github.com': 
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git
+   542e129..a1b1736  master -> master
+22:
+git checkout bug2 - се префрламе на гранка bug2
+излез:
+Switched to branch 'bug2'
+23:
+git rebase master - правиме rebase на гранката што значи дека ја поместуваме гранката во „иднината“ односно промените што се случиле во master правиме да се имаат случено и во bug2 со што понатаму merge нема да има конфликти. rebase може да резултира во конфликти при процесот на поместување на гранката
+излез:
+warning: skipped previously applied commit 99c2357
+hint: use --reapply-cherry-picks to include skipped commits
+hint: Disable this message with "git config advice.skippedCherryPicks false"
+Successfully rebased and updated refs/heads/bug2.
+излезот кажува дека за да git да не направи дупликат commit-и ги прерипало комитите кои веќе се имаат случено за bug2
+24:
+git checkout master - се префрлуваме на гранката master
+излез:
+Switched to branch 'master'
+25:
+git merge bug2 - ја спојуваме гранката bug2 кон гранката master
+излез:
+Updating a1b1736..a8f61b4
+Fast-forward
+ SILab1_2.java | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+како што очекуваме се случи fast forward merge затоа што направивме rebase
+26:
+git push origin --all - ги синхронизираме гранките со одалечениот репозиториум
+излез:
+Username for 'https://github.com': KristijanNedanoski
+Password for 'https://KristijanNedanoski@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 323 bytes | 323.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git
+   a1b1736..a8f61b4  master -> master
+ ! [rejected]        bug2 -> bug2 (non-fast-forward)
+error: failed to push some refs to 'https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git'
+hint: Updates were rejected because a pushed branch tip is behind its remote
+hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+hint: before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+наидовме на error кој е предизвикан од тоа што гит смета дека bug2 гранката локално е поназад од гранката online
+сега ќе се обидеме да го поправиме ова. ok од google и од самата вежба гледам дека ова е очекувано и дека сепак не треба да правам pull на bug2 затоа што тоа ми беше првата помисла ќе продолжам понатака.
+27:
+git push origin bug2 --force
+излез:
+Username for 'https://github.com': KristijanNedanoski
+Password for 'https://KristijanNedanoski@github.com': 
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/KristijanNedanoski/SI_2024_lab1_145013.git
+ + 99c2357...a8f61b4 bug2 -> bug2 (forced update)
+bubidebeliot@bubi-debeliot-HP-250-G7:~/Desktop/SI_20
+со ова присилно ја синхронизиравме гранката bug2 локално со гранката bug2 онлајн
+28:
+git logs > logs.txt - создаваме датотека со логовите
+git add logs.txt - ја додаваме на сцена
+git add 145013.txt - ја додаваме документацијата на сцена
+git commit -m "Final commit" - последниот комит по инструкции
+
+
